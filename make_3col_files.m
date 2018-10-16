@@ -13,18 +13,18 @@ for d = 1:designs
         
         % MID (anticipation)
         ant_onsets = order(order(:,1,d)==c,2,d);
-        out_onsets = ant_onsets + order(order(:,1,d)==c,3,d) + 1;
+        out_onsets = ant_onsets + order(order(:,1,d)==c,3,d) + 1; % 1 second for duration of cue
         ones_col = ones(length(ant_onsets),1);
-        anticipation = [ant_onsets order(order(:,1,d)==c,3,d) ones_col];
+        anticipation = [ant_onsets zeros(length(ones_col),1) ones_col];
         ant_f = fullfile(outputdir,['mid_ant_c' num2str(c) '.txt']);
         dlmwrite(ant_f,anticipation,'delimiter','\t');
         mid_outcome = [mid_outcome; [out_onsets ones_col ones_col]];
         
         % Card Task (consumption)
         dec_onsets = order(order(:,1,d)==c,2,d);
-        out_onsets = dec_onsets + order(order(:,1,d)==c,3,d) + 1;
+        out_onsets = dec_onsets + order(order(:,1,d)==c,3,d) + 1; % 1 second for duration of the guess screen (make longer?)
         ones_col = ones(length(ant_onsets),1);
-        outcomes = [out_onsets ones_col ones_col];
+        outcomes = [out_onsets zeros(length(ones_col),1) ones_col];
         dec_f = fullfile(outputdir,['card_out_c' num2str(c) '.txt']);
         dlmwrite(dec_f,outcomes,'delimiter','\t');
         card_decision = [card_decision; [dec_onsets ones_col ones_col]];
