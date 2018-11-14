@@ -13,6 +13,7 @@ whichrun = input('which run (1 or 2):');
 KbName('UnifyKeyNames');
 Screen('Preference','VisualDebuglevel', 0);
 
+
 thePath.start = pwd;                                % starting directory
 thePath.data = fullfile(thePath.start, 'data');     % path to Data directory
 thePath.scripts = fullfile(thePath.start, 'scripts');
@@ -39,9 +40,9 @@ feedback_time = 1;
 load([ thePath.start '/timing/run' num2str(whichrun) '.mat'])
 
 %define intertrial fixation
-fix_isi = run.isi2;
-fix_iti = run.isi1;
-trial_cond = run.cond;
+fix_isi = run.isi2(1:20)/2;
+fix_iti = run.isi1(1:20)/2;
+trial_cond = run.cond(1:20);
 
 backtick = '=';
 mkdir(fullfile(thePath.data,num2str(subnum)));
@@ -100,12 +101,73 @@ trial_starts = []; %trial starts not including saturation scans
 
 % LOAD STIMULI
 %DrawFormattedText(Window, 'loading stimuli....', 'center', 'center', 255);
+Instruction_1 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide1'), 'PNG'));
+Instruction_2 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide2'), 'PNG'));
+Instruction_3 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide3'), 'PNG'));
+Instruction_4 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide4'), 'PNG'));
+Instruction_5 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide5'), 'PNG'));
+Instruction_6 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide6'), 'PNG'));
+Instruction_7 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'/Instructions/Slide7'), 'PNG'));
 
 
 [normBoundsRect, notused] = Screen('TextBounds', Window, 'loading stimuli....');
 Screen('DrawText',Window, 'loading stimuli....', Hcenter-normBoundsRect(3)/2, Vcenter-normBoundsRect(4)/2, [255 255 255]);
 Screen('Flip', Window);
 WaitSecs(3)
+
+
+Screen('DrawTexture', Window, Instruction_1);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+
+Screen('DrawTexture', Window, Instruction_2);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+
+Screen('DrawTexture', Window, Instruction_3);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+Screen('DrawTexture', Window, Instruction_4);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+Screen('DrawTexture', Window, Instruction_5);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+Screen('DrawTexture', Window, Instruction_6);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+Screen('DrawTexture', Window, Instruction_7);
+Screen('Flip',Window);
+if IsOSX
+    getKey(backtick, k);                             % wait for backtick before continuing
+else
+    getKey(backtick);
+end
+
 
 %LOAD IN FIXATIONS
 fix1 = Screen('MakeTexture', Window, imread(fullfile(thePath.stims,'cross'), 'png'));
