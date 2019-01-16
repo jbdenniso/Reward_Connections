@@ -2,7 +2,8 @@
 Scanning project with Deepu and Jeff.
 
 ## Notes here
-to be filled in later
+Multiband factor=3
+
 
 ## instructions here
 to be filled in later
